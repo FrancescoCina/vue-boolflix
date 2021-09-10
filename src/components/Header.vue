@@ -4,10 +4,7 @@
       <div class="row h-100 justify-content-between align-items-center">
         <div class="col">LOGO</div>
         <div class="col">
-          <div class="input-search">
-            <input placeholder="Cerca il tuo contenuto" type="search" />
-            <button>Cerca</button>
-          </div>
+          <Search />
         </div>
       </div>
     </div>
@@ -15,8 +12,10 @@
 </template>
 
 <script>
+import Search from "@/components/Search.vue";
 export default {
   name: "Header",
+  components: { Search },
 };
 </script>
 
