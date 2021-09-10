@@ -24,9 +24,23 @@ export default {
   methods: {
     catchSearchTerm(searchTerm) {
       this.termFromHeader = searchTerm;
+      this.getMoviesFromApi();
+      this.getSeriesFromApi();
+    },
+    getMoviesFromApi() {
       axios
         .get(
           `${this.baseUri}/search/movie?api_key=${this.apiKey}&query=${this.termFromHeader}`
+        )
+        .then((res) => {
+          this.movies = res.data.results;
+          console.log(this.movies);
+        });
+    },
+    getSeriesFromApi() {
+      axios
+        .get(
+          `${this.baseUri}/search/tv?api_key=${this.apiKey}&query=${this.termFromHeader}`
         )
         .then((res) => {
           this.movies = res.data.results;
