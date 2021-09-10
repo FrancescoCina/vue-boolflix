@@ -34,7 +34,6 @@ export default {
         )
         .then((res) => {
           this.movies = res.data.results;
-          console.log(this.movies);
         });
     },
     getSeriesFromApi() {
@@ -44,7 +43,6 @@ export default {
         )
         .then((res) => {
           this.movies = res.data.results;
-          console.log(this.movies);
         });
     },
   },

@@ -29,7 +29,7 @@
         />
         <span v-else v-text="movie.original_language" />
       </li>
-      <li>{{ movie.vote_average }}</li>
+      <li>{{ halveAverage(movie.vote_average) }}</li>
     </ul>
   </div>
 </template>
@@ -43,6 +43,8 @@ export default {
       originalLanguage: "",
       flags: ["en", "it"],
       baseImgPath: "https://image.tmdb.org/t/p/w342",
+      newContentAverage: 0,
+      starsReview: "",
     };
   },
   methods: {
@@ -52,6 +54,39 @@ export default {
     getUrlPoster(finalPath) {
       return this.baseImgPath + finalPath;
     },
+    halveAverage(contentAverage) {
+      this.newContentAverage = Math.ceil(contentAverage / 2);
+      return this.newContentAverage;
+      // this.getStarsReview(this.newContentAverage);
+    },
+    /* getStarsReview(average) {
+      switch (average) {
+        case "0":
+          this.starsReview =
+            '`<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>`';
+          break;
+        case "1":
+          this.starsReview =
+            '`<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>`';
+          break;
+        case "2":
+          this.starsReview =
+            '`<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>`';
+          break;
+        case "3":
+          this.starsReview =
+            '`<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>`';
+          break;
+        case "4":
+          this.starsReview =
+            '`<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>`';
+          break;
+        case "5":
+          this.starsReview =
+            '`<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>`';
+          break;
+      } 
+    },*/
   },
 };
 </script>
