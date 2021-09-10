@@ -1,7 +1,12 @@
 <template>
   <main>
     <div class="container">
-      <Card :movies="movies" />
+      <div class="p-5" v-if="movies.length == 0">
+        <p class="error p-2">La tua ricerca non ha prodotto risultati</p>
+      </div>
+      <div v-else>
+        <Card :movies="movies" />
+      </div>
     </div>
   </main>
 </template>
@@ -18,7 +23,11 @@ export default {
 
 <style scoped lang="scss">
 main {
-  height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
   background-color: yellow;
+}
+.error {
+  border: 2px solid red;
+  color: red;
 }
 </style>

@@ -13,6 +13,7 @@
 
       <li>
         <img
+          class="img-fluid"
           v-if="flags.includes(movie.original_language)"
           :src="printFlag(movie.original_language)"
           :alt="movie.original_title || movie.original_name"
@@ -42,5 +43,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
+li {
+  width: 35px;
+}
 </style>
