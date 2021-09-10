@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @passToApp="catchSearchTerm" />
-    <Contents />
+    <Contents :movies="movies" />
   </div>
 </template>
 
@@ -18,6 +18,7 @@ export default {
       termFromHeader: "",
       baseUri: "https://api.themoviedb.org/3",
       apiKey: "7cc65adcc4f7b2a8a3bef496a2b1b091",
+      movies: {},
     };
   },
   methods: {
@@ -28,7 +29,8 @@ export default {
           `${this.baseUri}/search/movie?api_key=${this.apiKey}&query=${this.termFromHeader}`
         )
         .then((res) => {
-          console.log(res.data.results);
+          this.movies = res.data.results;
+          console.log(this.movies);
         });
     },
   },

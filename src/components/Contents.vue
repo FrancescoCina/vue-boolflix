@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="container">
-      <Card />
+      <Card :movies="movies" />
     </div>
   </main>
 </template>
@@ -12,7 +12,7 @@ import Card from "@/components/Card.vue";
 export default {
   name: "Contents",
   components: { Card },
-  // props: [""],
+  props: ["movies"],
 };
 </script>
 
