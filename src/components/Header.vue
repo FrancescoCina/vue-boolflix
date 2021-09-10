@@ -4,7 +4,7 @@
       <div class="row h-100 justify-content-between align-items-center">
         <div class="col">LOGO</div>
         <div class="col">
-          <Search />
+          <Search @passUserTerm="passToHeader" />
         </div>
       </div>
     </div>
@@ -16,6 +16,17 @@ import Search from "@/components/Search.vue";
 export default {
   name: "Header",
   components: { Search },
+  data() {
+    return {
+      termFromSearch: "",
+    };
+  },
+  methods: {
+    passToHeader(searchTerm) {
+      this.termFromSearch = searchTerm;
+      this.$emit("passToApp", this.termFromSearch);
+    },
+  },
 };
 </script>
 
