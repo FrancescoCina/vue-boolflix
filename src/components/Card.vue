@@ -1,23 +1,20 @@
 <template>
   <div class="card-container">
+    <!-- Section MOVIES -->
+    <h3 v-if="movies.length !== 0">Movies</h3>
     <ul v-for="movie in movies" :key="movie.id" class="py-5">
       <li>
         <div class="img-container">
           <img
             class="img-fluid"
             :src="getUrlPoster(movie.poster_path)"
-            :alt="movie.title || movie.name"
+            :alt="movie.title"
           />
         </div>
       </li>
-      <li>{{ movie.title || movie.name }}</li>
-      <li
-        v-if="
-          movie.title !== movie.original_title ||
-          movie.name !== movie.original_name
-        "
-      >
-        {{ movie.original_title || movie.original_name }}
+      <li>{{ movie.title }}</li>
+      <li v-if="movie.title !== movie.original_title">
+        {{ movie.original_title }}
       </li>
 
       <li class="flag-container">
@@ -25,11 +22,42 @@
           class="img-fluid"
           v-if="flags.includes(movie.original_language)"
           :src="printFlag(movie.original_language)"
-          :alt="movie.original_title || movie.original_name"
+          :alt="movie.original_title"
         />
         <span v-else v-text="movie.original_language" />
       </li>
       <li>{{ halveAverage(movie.vote_average) }}</li>
+    </ul>
+
+    <!-- Section SERIES -->
+
+    <h3 v-if="series.length !== 0">Serie TV</h3>
+
+    <ul v-for="serie in series" :key="serie.id" class="py-5">
+      <li>
+        <div class="img-container">
+          <img
+            class="img-fluid"
+            :src="getUrlPoster(serie.poster_path)"
+            :alt="serie.name"
+          />
+        </div>
+      </li>
+      <li>{{ serie.name }}</li>
+      <li v-if="serie.name !== serie.original_name">
+        {{ serie.original_name }}
+      </li>
+
+      <li class="flag-container">
+        <img
+          class="img-fluid"
+          v-if="flags.includes(serie.original_language)"
+          :src="printFlag(serie.original_language)"
+          :alt="serie.original_name"
+        />
+        <span v-else v-text="serie.original_language" />
+      </li>
+      <li>{{ halveAverage(serie.vote_average) }}</li>
     </ul>
   </div>
 </template>
@@ -37,7 +65,7 @@
 <script>
 export default {
   name: "Card",
-  props: ["movies"],
+  props: ["movies", "series"],
   data() {
     return {
       originalLanguage: "",
