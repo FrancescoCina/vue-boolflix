@@ -86,31 +86,32 @@ export default {
       this.newContentAverage = Math.ceil(contentAverage / 2);
 
       switch (this.newContentAverage) {
-        case "0":
+        case 0:
           this.starsReview =
-            '`<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>`';
+            '<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>';
           break;
-        case "1":
+        case 1:
           this.starsReview =
-            '`<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>`';
+            '<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>';
           break;
-        case "2":
+        case 2:
           this.starsReview =
-            '`<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>`';
+            '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>';
           break;
-        case "3":
+        case 3:
           this.starsReview =
-            '`<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>`';
+            '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>';
           break;
-        case "4":
+        case 4:
           this.starsReview =
-            '`<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>`';
+            '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>';
           break;
-        case "5":
+        case 5:
           this.starsReview =
-            '`<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>`';
+            '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';
           break;
       }
+      return this.starsReview;
     },
   },
 };
@@ -128,5 +129,8 @@ export default {
 li {
   list-style-type: none;
   font-weight: bold;
+}
+.black {
+  color: black;
 }
 </style>
