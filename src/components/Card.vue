@@ -12,9 +12,9 @@
           />
         </div>
       </li>
-      <li>{{ movie.title }}</li>
+      <li>TItolo: {{ movie.title }}</li>
       <li v-if="movie.title !== movie.original_title">
-        {{ movie.original_title }}
+        Titolo Originale: {{ movie.original_title }}
       </li>
 
       <li class="flag-container">
@@ -24,9 +24,9 @@
           :src="printFlag(movie.original_language)"
           :alt="movie.original_title"
         />
-        <span v-else v-text="movie.original_language" />
+        <span v-else> Lingua Originale: {{ movie.original_language }}</span>
       </li>
-      <li>{{ halveAverage(movie.vote_average) }}</li>
+      <li>Voto: {{ getStarsReview(movie.vote_average) }}</li>
     </ul>
 
     <!-- Section SERIES -->
@@ -43,9 +43,9 @@
           />
         </div>
       </li>
-      <li>{{ serie.name }}</li>
+      <li>Titolo: {{ serie.name }}</li>
       <li v-if="serie.name !== serie.original_name">
-        {{ serie.original_name }}
+        Titolo Orginale: {{ serie.original_name }}
       </li>
 
       <li class="flag-container">
@@ -55,9 +55,9 @@
           :src="printFlag(serie.original_language)"
           :alt="serie.original_name"
         />
-        <span v-else v-text="serie.original_language" />
+        <span v-else> Lingua Originale: {{ serie.original_language }}</span>
       </li>
-      <li>{{ halveAverage(serie.vote_average) }}</li>
+      <li>Voto: {{ getStarsReview(serie.vote_average) }}</li>
     </ul>
   </div>
 </template>
@@ -82,13 +82,10 @@ export default {
     getUrlPoster(finalPath) {
       return this.baseImgPath + finalPath;
     },
-    halveAverage(contentAverage) {
+    getStarsReview(contentAverage) {
       this.newContentAverage = Math.ceil(contentAverage / 2);
-      return this.newContentAverage;
-      // this.getStarsReview(this.newContentAverage);
-    },
-    /* getStarsReview(average) {
-      switch (average) {
+
+      switch (this.newContentAverage) {
         case "0":
           this.starsReview =
             '`<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>`';
@@ -113,8 +110,8 @@ export default {
           this.starsReview =
             '`<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>`';
           break;
-      } 
-    },*/
+      }
+    },
   },
 };
 </script>
@@ -126,5 +123,10 @@ export default {
 
 .img-container {
   width: 150px;
+}
+
+li {
+  list-style-type: none;
+  font-weight: bold;
 }
 </style>
