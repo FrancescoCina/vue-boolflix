@@ -39,7 +39,12 @@
                 Lingua Originale: {{ movie.original_language }}</span
               >
             </li>
-            <li>Voto: {{ getStarsReview(movie.vote_average) }}</li>
+            <li>
+              Voto:
+              <span v-for="number in 5" :key="number">
+                {{ getStarsReview(movie.vote_average, number) }}
+              </span>
+            </li>
           </ul>
         </div>
       </div>
@@ -91,7 +96,7 @@
       </div>
     </div>
   </div>
-</template>
+</template> 
 
 <script>
 export default {
@@ -113,36 +118,15 @@ export default {
     getUrlPoster(finalPath) {
       return this.baseImgPath + finalPath;
     },
-    getStarsReview(contentAverage) {
+    getStarsReview(contentAverage, number) {
       this.newContentAverage = Math.ceil(contentAverage / 2);
-
-      switch (this.newContentAverage) {
-        case 0:
-          this.starsReview =
-            '<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>';
-          break;
-        case 1:
-          this.starsReview =
-            '<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>';
-          break;
-        case 2:
-          this.starsReview =
-            '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>';
-          break;
-        case 3:
-          this.starsReview =
-            '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>';
-          break;
-        case 4:
-          this.starsReview =
-            '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>';
-          break;
-        case 5:
-          this.starsReview =
-            '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';
-          break;
+      if (this.newContentAverage < number) {
+        console.log("sono passato");
+        return <i class="fas fa-star"></i>;
+      } else {
+        console.log("sono passato 2");
+        return <i class="far fa-star"></i>;
       }
-      return this.starsReview;
     },
   },
 };

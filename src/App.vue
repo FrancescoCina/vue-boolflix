@@ -44,7 +44,6 @@ export default {
         )
         .then((res) => {
           this.series = res.data.results;
-          console.log(this.series);
         });
     },
   },
