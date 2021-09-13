@@ -2,7 +2,7 @@
   <header>
     <div class="h-100 container">
       <div class="row h-100 justify-content-between align-items-center">
-        <div class="col">LOGO</div>
+        <div class="col">Logo</div>
         <div class="col">
           <Search @passUserTerm="passToHeader" />
         </div>
@@ -33,6 +33,6 @@ export default {
 <style scoped lang="scss">
 header {
   height: 100px;
-  background-color: red;
+  background-color: #e50914;
 }
 </style>

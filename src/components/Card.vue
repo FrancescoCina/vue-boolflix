@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <!-- Section MOVIES -->
-    <h3 v-if="movies.length !== 0" class="text-center py-5">Movies</h3>
+    <h3 v-if="movies.length !== 0" class="text-center white py-5">Movies</h3>
     <div class="row flex-wrap">
       <div
-        v-for="movie in movies"
-        :key="movie.id"
+        v-for="(movie, index) in movies"
+        :key="movie.id + index"
         class="
           col-12 col-sm-6 col-md-4 col-lg-3
           card
           border-0
-          bg-yellow
+          bg-darkgrey
           clickable
         "
       >
@@ -41,9 +41,15 @@
             </li>
             <li>
               Voto:
-              <span v-for="number in 5" :key="number">
-                {{ getStarsReview(movie.vote_average, number) }}
-              </span>
+              <i
+                v-for="number in 5"
+                :key="number"
+                :class="
+                  number <= getAverageValue(movie.vote_average)
+                    ? 'fas fa-star'
+                    : 'far fa-star'
+                "
+              ></i>
             </li>
           </ul>
         </div>
@@ -51,16 +57,18 @@
 
       <!-- Section SERIES -->
 
-      <h3 v-if="series.length !== 0" class="text-center py-5">Tv Series</h3>
+      <h3 v-if="series.length !== 0" class="text-center white py-5">
+        Tv Series
+      </h3>
       <div class="row flex-wrap">
         <div
-          v-for="serie in series"
-          :key="serie.id"
+          v-for="(serie, index) in series"
+          :key="serie.id + index"
           class="
             col-12 col-sm-6 col-md-4 col-lg-3
             card
             border-0
-            bg-yellow
+            bg-darkgrey
             clickable
           "
         >
@@ -89,7 +97,18 @@
                   Lingua Originale: {{ serie.original_language }}</span
                 >
               </li>
-              <li>Voto: {{ getStarsReview(serie.vote_average) }}</li>
+              <li>
+                Voto:
+                <i
+                  v-for="number in 5"
+                  :key="number"
+                  :class="
+                    number <= getAverageValue(serie.vote_average)
+                      ? 'fas fa-star'
+                      : 'far fa-star'
+                  "
+                ></i>
+              </li>
             </ul>
           </div>
         </div>
@@ -116,20 +135,21 @@ export default {
       return require(`@/assets/img/${language}.png`);
     },
     getUrlPoster(finalPath) {
-      return this.baseImgPath + finalPath;
-    },
-    getStarsReview(contentAverage, number) {
-      this.newContentAverage = Math.ceil(contentAverage / 2);
-      if (this.newContentAverage < number) {
-        console.log("sono passato");
-        return <i class="fas fa-star"></i>;
+      if (finalPath == "null") {
+        console.log("non trovata");
+        return require(`@/assets/img/img-not-found.jpg`);
       } else {
-        console.log("sono passato 2");
-        return <i class="far fa-star"></i>;
+        return this.baseImgPath + finalPath;
       }
+    },
+    getAverageValue(average) {
+      return (this.newContentAverage = Math.ceil(average / 2));
     },
   },
 };
+
+/* Codice con direttiva v-html=c  
+ v-html="getStarsReview(movie.vote_average, number)" */
 </script>
 
 <style scoped lang="scss">
@@ -165,12 +185,16 @@ li {
   display: none;
 }
 
+.white {
+  color: #fff;
+}
+
 .card:hover .content-information {
   transform: rotateY(0deg);
   display: block;
 }
 
-.bg-yellow {
-  background-color: yellow;
+.bg-darkgrey {
+  background-color: #141414;
 }
 </style>

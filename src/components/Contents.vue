@@ -24,7 +24,7 @@ export default {
 <style scoped lang="scss">
 main {
   min-height: calc(100vh - 100px);
-  background-color: yellow;
+  background-color: #141414;
 }
 .error {
   border: 2px solid red;

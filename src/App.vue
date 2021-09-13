@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     catchSearchTerm(searchTerm) {
+      if (!searchTerm) this.movies = this.series = {};
       this.termFromHeader = searchTerm;
       this.getMoviesFromApi();
       this.getSeriesFromApi();
