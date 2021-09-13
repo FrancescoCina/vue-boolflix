@@ -2,7 +2,9 @@
   <header>
     <div class="h-100 container">
       <div class="row h-100 justify-content-between align-items-center">
-        <div class="col">Logo</div>
+        <div class="col">
+          <img src="@/assets/img/Netflix-Logo.png" width="180" alt="Logo" />
+        </div>
         <div class="col">
           <Search @passUserTerm="passToHeader" />
         </div>
@@ -33,6 +35,7 @@ export default {
 <style scoped lang="scss">
 header {
   height: 100px;
-  background-color: #e50914;
+  background-color: #141414;
+  box-shadow: 5px 10px #e50914;
 }
-</style>
+</style>\

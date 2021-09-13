@@ -21,12 +21,12 @@
             :alt="movie.title"
           />
         </div>
-        <div class="content-information h-100 p-5 text-center">
+        <div class="content-information h-100 p-3 text-center">
           <ul class="py-5">
             <li></li>
-            <li>Titolo: {{ movie.title }}</li>
+            <li>Title: {{ movie.title }}</li>
             <li v-if="movie.title !== movie.original_title">
-              Titolo Originale: {{ movie.original_title }}
+              Original Title: {{ movie.original_title }}
             </li>
             <li class="flag-container">
               <img
@@ -36,11 +36,11 @@
                 :alt="movie.original_title"
               />
               <span v-else>
-                Lingua Originale: {{ movie.original_language }}</span
+                Original Language: {{ movie.original_language }}</span
               >
             </li>
             <li>
-              Voto:
+              Vote:
               <i
                 v-for="number in 5"
                 :key="number"
@@ -50,6 +50,10 @@
                     : 'far fa-star'
                 "
               ></i>
+            </li>
+            <li class="pt-5">
+              <p v-if="movie.overview == ''">...</p>
+              <p v-else>Overview: {{ movie.overview }}</p>
             </li>
           </ul>
         </div>
@@ -79,7 +83,7 @@
               :alt="serie.name"
             />
           </div>
-          <div class="content-information h-100 p-5 text-center">
+          <div class="content-information h-100 p-3 text-center">
             <ul class="py-5">
               <li></li>
               <li>Titolo: {{ serie.name }}</li>
