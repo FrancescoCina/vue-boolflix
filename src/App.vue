@@ -4,7 +4,7 @@
     <Contents :movies="movies" :series="series" />
   </div>
 </template>
-
+bn         
 <script>
 import axios from "axios";
 import Header from "@/components/Header.vue";
