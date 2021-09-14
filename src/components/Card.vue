@@ -51,10 +51,26 @@
                 "
               ></i>
             </li>
+            <li
+              v-for="(genere, index) in genresMoviesCompared(
+                movie.genre_ids,
+                moviesGenres
+              )"
+              :key="index"
+              class="movies-genres"
+            >
+              {{ genere }}
+            </li>
             <li class="pt-5">
               <p v-if="movie.overview == ''">...</p>
               <p v-else>Overview: {{ movie.overview }}</p>
             </li>
+            <!--  <li>
+              {{ getCastFromIdMovie(movie.id) }}
+              <span v-for="(actorName, index) in fiveActorsName" :key="index">
+                {{ actorName }}
+              </span>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -113,6 +129,20 @@
                   "
                 ></i>
               </li>
+              <li
+                v-for="(genere, index) in genresSeriesCompared(
+                  serie.genre_ids,
+                  seriesGenres
+                )"
+                :key="index"
+                class="movies-genres"
+              >
+                {{ genere }}
+              </li>
+              <li class="pt-5">
+                <p v-if="serie.overview == ''">...</p>
+                <p v-else>Overview: {{ serie.overview }}</p>
+              </li>
             </ul>
           </div>
         </div>
@@ -122,38 +152,70 @@
 </template> 
 
 <script>
+// import axios from "axios";
 export default {
   name: "Card",
-  props: ["movies", "series"],
+  props: ["movies", "series", "moviesGenres", "seriesGenres"],
   data() {
     return {
+      baseUri: "https://api.themoviedb.org/3",
+      apiKey: "7cc65adcc4f7b2a8a3bef496a2b1b091",
       originalLanguage: "",
       flags: ["en", "it"],
       baseImgPath: "https://image.tmdb.org/t/p/w342",
       newContentAverage: 0,
       starsReview: "",
+      casts: [],
+      fiveActorsName: [],
     };
   },
   methods: {
+    /* getNameFiveActors() {
+      for (let i = 0; i < 5; i++) {
+        this.fiveActorsName.push(this.casts[i].name);
+      }
+    },
+    getCastFromIdMovie(idMovie) {
+      axios
+        .get(`${this.baseUri}/movie/${idMovie}/credits?api_key=${this.apiKey}`)
+        .then((res) => {
+          this.casts = res.data.cast;
+        });
+      this.getNameFiveActors();
+    },  */
     printFlag(language) {
       return require(`@/assets/img/${language}.png`);
     },
     getUrlPoster(finalPath) {
-      if (finalPath == "null") {
-        console.log("non trovata");
-        return require(`@/assets/img/img-not-found.jpg`);
-      } else {
+      if (finalPath) {
         return this.baseImgPath + finalPath;
+      } else {
+        return require(`@/assets/img/img-not-found.jpg`);
       }
     },
     getAverageValue(average) {
       return (this.newContentAverage = Math.ceil(average / 2));
     },
+    genresMoviesCompared(idsMovie, moviesGeneres) {
+      let signleMovieGenres = [];
+      moviesGeneres.forEach((moviesGenre) => {
+        if (idsMovie.includes(moviesGenre.id)) {
+          signleMovieGenres.push(moviesGenre.name);
+        }
+      });
+      return signleMovieGenres;
+    },
+    genresSeriesCompared(idsTv, serieGenres) {
+      let singleTvGenres = [];
+      serieGenres.forEach((tvGenre) => {
+        if (idsTv.includes(tvGenre.id)) {
+          singleTvGenres.push(tvGenre.name);
+        }
+      });
+      return singleTvGenres;
+    },
   },
 };
-
-/* Codice con direttiva v-html=c  
- v-html="getStarsReview(movie.vote_average, number)" */
 </script>
 
 <style scoped lang="scss">

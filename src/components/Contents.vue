@@ -5,7 +5,12 @@
         <p class="error p-2">La tua ricerca non ha prodotto risultati</p>
       </div>
       <div v-else>
-        <Card :movies="movies" :series="series" />
+        <Card
+          :movies="movies"
+          :series="series"
+          :moviesGenres="moviesGenres"
+          :seriesGenres="seriesGenres"
+        />
       </div>
     </div>
   </main>
@@ -17,7 +22,7 @@ import Card from "@/components/Card.vue";
 export default {
   name: "Contents",
   components: { Card },
-  props: ["movies", "series"],
+  props: ["movies", "series", "moviesGenres", "seriesGenres"],
 };
 </script>
 

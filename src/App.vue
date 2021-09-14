@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <Header @passToApp="catchSearchTerm" />
-    <Contents :movies="movies" :series="series" />
+    <Contents
+      :movies="movies"
+      :series="series"
+      :moviesGenres="moviesGenres"
+      :seriesGenres="seriesGenres"
+    />
   </div>
 </template>
 bn         
@@ -20,6 +25,8 @@ export default {
       apiKey: "7cc65adcc4f7b2a8a3bef496a2b1b091",
       movies: {},
       series: {},
+      moviesGenres: {},
+      seriesGenres: {},
     };
   },
   methods: {
@@ -28,6 +35,8 @@ export default {
       this.termFromHeader = searchTerm;
       this.getMoviesFromApi();
       this.getSeriesFromApi();
+      this.getGenresMoviesFromApi();
+      this.getGenresSeriesFromApi();
     },
     getMoviesFromApi() {
       axios
@@ -45,6 +54,20 @@ export default {
         )
         .then((res) => {
           this.series = res.data.results;
+        });
+    },
+    getGenresMoviesFromApi() {
+      axios
+        .get(`${this.baseUri}/genre/movie/list?api_key=${this.apiKey}`)
+        .then((res) => {
+          this.moviesGenres = res.data.genres;
+        });
+    },
+    getGenresSeriesFromApi() {
+      axios
+        .get(`${this.baseUri}/genre/tv/list?api_key=${this.apiKey}`)
+        .then((res) => {
+          this.seriesGenres = res.data.genres;
         });
     },
   },
